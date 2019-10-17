@@ -163,6 +163,12 @@
                   placeholder="CVV"
                 />
               </p>
+              <p class="form_image_required">
+                <img src="~assets/images/cards.svg" alt="" />
+                <span>
+                  * Denote required fields
+                </span>
+              </p>
               <p>
                 <label>
                   <input
