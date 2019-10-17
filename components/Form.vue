@@ -2,34 +2,43 @@
   <div>
     <form id="app" novalidate @submit.prevent="submit()">
       <div :class="{ error: validation.hasError('data.firstName') }">
-        <input
-          id="firstName"
-          v-model="data.firstName"
-          type="text"
-          placeholder="First Name*"
-        />
+        <div>
+          <input
+            id="firstName"
+            v-model="data.firstName"
+            type="text"
+            placeholder="First Name*"
+          />
+        </div>
+
         <div class="message">{{ validation.firstError('data.firstName') }}</div>
-        <input
-          id="lastName"
-          v-model="data.lastName"
-          type="text"
-          placeholder="Last Name*"
-          required
-        />
+        <div>
+          <input
+            id="lastName"
+            v-model="data.lastName"
+            type="text"
+            placeholder="Last Name*"
+            required
+          />
+        </div>
       </div>
       <div>
-        <select id="gender" v-model="data.gender" name="gender" required>
-          <option diabled value="">Select Gender*</option>
-          <option>Vanilla Sky</option>
-          <option>Atomic Blonde</option>
-        </select>
-        <input
-          id="dob"
-          v-model="data.dob"
-          type="text"
-          placeholder="DOB: MM/DD/YYYY*"
-          required
-        />
+        <div>
+          <select id="gender" v-model="data.gender" name="gender" required>
+            <option diabled value="">Select Gender*</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div>
+          <input
+            id="dob"
+            v-model="data.dob"
+            type="text"
+            placeholder="DOB: MM/DD/YYYY*"
+            required
+          />
+        </div>
       </div>
       <div>
         <div :class="{ error: validation.hasError('data.email') }">
@@ -51,19 +60,25 @@
         </div>
       </div>
       <div class="cc_wrap">
-        <input
-          id="cc_number"
-          v-model="data.cc_number"
-          type="text"
-          placeholder="Credit Card Number"
-        />
-        <input
-          id="exp_date"
-          v-model="data.exp_date"
-          type="text"
-          placeholder="MM/YY"
-        />
-        <input id="cvv" v-model="data.cvv" type="text" placeholder="CVV" />
+        <div class="first">
+          <input
+            id="cc_number"
+            v-model="data.cc_number"
+            type="text"
+            placeholder="Credit Card Number"
+          />
+        </div>
+        <div class="second">
+          <input
+            id="exp_date"
+            v-model="data.exp_date"
+            type="text"
+            placeholder="MM/YY"
+          />
+        </div>
+        <div class="third">
+          <input id="cvv" v-model="data.cvv" type="text" placeholder="CVV" />
+        </div>
       </div>
       <div class="form_image_required">
         <img src="~assets/images/cards.svg" alt="" />
@@ -221,7 +236,9 @@ const Validator = SimpleVueValidation.Validator
 export default {
   data() {
     return {
-      data: {},
+      data: {
+        gender: ''
+      },
       privacyPolicyVisible: false,
       termsVisible: false
     }
