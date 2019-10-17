@@ -256,12 +256,12 @@ export default {
     }
   },
   validators: {
-    'data.email': (value) => {
+    'data.email': (value = '') => {
       return Validator.value(value)
         .required()
         .email()
     },
-    'data.firstName': (value) => {
+    'data.firstName': (value = '') => {
       return Validator.value(value).required()
     }
   }
