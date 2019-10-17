@@ -1,18 +1,19 @@
 <template>
   <div>
     <form id="app" novalidate @submit.prevent="submit()">
-      <div :class="{ error: validation.hasError('data.firstName') }">
-        <div>
+      <div>
+        <div :class="{ error: validation.hasError('data.firstName') }">
           <input
             id="firstName"
             v-model="data.firstName"
             type="text"
             placeholder="First Name*"
           />
+          <div class="message">
+            {{ validation.firstError('data.firstName') }}
+          </div>
         </div>
-
-        <div class="message">{{ validation.firstError('data.firstName') }}</div>
-        <div>
+        <div :class="{ error: validation.hasError('data.lastName') }">
           <input
             id="lastName"
             v-model="data.lastName"
@@ -20,17 +21,23 @@
             placeholder="Last Name*"
             required
           />
+          <div class="message">
+            {{ validation.firstError('data.lastName') }}
+          </div>
         </div>
       </div>
       <div>
-        <div>
+        <div :class="{ error: validation.hasError('data.gender') }">
           <select id="gender" v-model="data.gender" name="gender" required>
             <option diabled value="">Select Gender*</option>
             <option>Male</option>
             <option>Female</option>
           </select>
+          <div class="message">
+            {{ validation.firstError('data.gender') }}
+          </div>
         </div>
-        <div>
+        <div :class="{ error: validation.hasError('data.dob') }">
           <input
             id="dob"
             v-model="data.dob"
@@ -38,6 +45,9 @@
             placeholder="DOB: MM/DD/YYYY*"
             required
           />
+          <div class="message">
+            {{ validation.firstError('data.dob') }}
+          </div>
         </div>
       </div>
       <div>
@@ -262,6 +272,15 @@ export default {
         .email()
     },
     'data.firstName': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.lastName': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.gender': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.dob': (value = '') => {
       return Validator.value(value).required()
     }
   }
