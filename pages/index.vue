@@ -86,7 +86,7 @@
           <div class="col-6">
             <form
               id="app"
-              @submit="checkForm"
+              @submit="checkForm()"
               action="https://vuejs.org/"
               method="post"
               novalidate="true"
@@ -198,11 +198,11 @@
                   pay the membership fee each month that I remain a member, and
                   that clicking is my electronic signature accepting the
                   programs
-                  <a href="#" @click="isVisible1 = true">
+                  <a href="javascript:void()" @click="isVisible1 = true">
                     Terms and Conditions
                   </a>
                   , achknowledging receipt of the
-                  <a href="#" @click="isVisible2 = true">
+                  <a href="javascript:void()" @click="isVisible2 = true">
                     Program Privacy Policy
                   </a>
                   and agreeing to the same.
@@ -219,7 +219,7 @@
     <Modal :visible="isVisible1" @close="isVisible1 = false">
       content 1
     </Modal>
-    <Modal :visible="isVisible1" @close="isVisible2 = false">
+    <Modal :visible="isVisible2" @close="isVisible2 = false">
       content 2
     </Modal>
     <button type="button" name="button" @click="isVisible1 = true">
@@ -249,6 +249,9 @@ export default {
       dob: '',
       phone: ''
     }
+  },
+  methods: {
+    checkform() {}
   },
   components: {
     Modal
