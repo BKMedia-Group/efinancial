@@ -1,16 +1,10 @@
 <template>
   <div>
-    <form id="app" novalidate @submit.prevent="submit()">
+    <form novalidate @submit.prevent="submit()">
       <div :class="{ error: validation.hasError('data.firstName') }">
-        <input
-          id="firstName"
-          v-model="data.firstName"
-          type="text"
-          placeholder="First Name*"
-        />
+        <input v-model="data.firstName" type="text" placeholder="First Name*" />
         <div class="message">{{ validation.firstError('data.firstName') }}</div>
         <input
-          id="lastName"
           v-model="data.lastName"
           type="text"
           placeholder="Last Name*"
@@ -18,13 +12,12 @@
         />
       </div>
       <div>
-        <select id="gender" v-model="data.gender" name="gender" required>
+        <select v-model="data.gender">
           <option diabled value="">Select Gender*</option>
           <option>Vanilla Sky</option>
           <option>Atomic Blonde</option>
         </select>
         <input
-          id="dob"
           v-model="data.dob"
           type="text"
           placeholder="DOB: MM/DD/YYYY*"
@@ -34,36 +27,24 @@
       <div>
         <div :class="{ error: validation.hasError('data.email') }">
           <input
-            id="email"
-            v-model="data.email"
             type="email"
+            v-model="data.email"
             placeholder="Email Address*"
           />
           <div class="message">{{ validation.firstError('data.email') }}</div>
         </div>
         <div>
-          <input
-            id="phone"
-            v-model="data.phone"
-            type="tel"
-            placeholder="Phone Number"
-          />
+          <input v-model="data.phone" type="tel" placeholder="Phone Number" />
         </div>
       </div>
       <div class="cc_wrap">
         <input
-          id="cc_number"
           v-model="data.cc_number"
           type="text"
           placeholder="Credit Card Number"
         />
-        <input
-          id="exp_date"
-          v-model="data.exp_date"
-          type="text"
-          placeholder="MM/YY"
-        />
-        <input id="cvv" v-model="data.cvv" type="text" placeholder="CVV" />
+        <input v-model="data.exp_date" type="text" placeholder="MM/YY" />
+        <input v-model="data.cvv" type="text" placeholder="CVV" />
       </div>
       <div class="form_image_required">
         <img src="~assets/images/cards.svg" alt="" />
@@ -245,6 +226,9 @@ export default {
         .email()
     },
     'data.firstName': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.gender': (value = '') => {
       return Validator.value(value).required()
     }
   }
