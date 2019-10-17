@@ -60,12 +60,16 @@
     color: #4b4f54;
     font-size: 11px;
     line-height: 18px;
+    text-align: left;
   }
   p:last-of-type {
     margin-bottom: 0;
   }
   strong {
     display: block;
+  }
+  span {
+    font-weight: bold;
   }
 }
 .modal-enter .modal-container,
