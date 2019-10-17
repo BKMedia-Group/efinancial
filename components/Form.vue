@@ -102,11 +102,11 @@
           By clicking on the button, I agree to start my membership and pay the
           membership fee each month that I remain a member, and that clicking is
           my electronic signature accepting the programs
-          <a href="#" @click.prevent="isVisible1 = true">
+          <a href="#" @click.prevent="termsVisible = true">
             Terms and Conditions
           </a>
           , achknowledging receipt of the
-          <a href="#" @click.prevent="isVisible2 = true">
+          <a href="#" @click.prevent="privacyPolicyVisible = true">
             Program Privacy Policy
           </a>
           and agreeing to the same.
@@ -216,6 +216,7 @@
 </template>
 <script>
 import SimpleVueValidation from 'simple-vue-validator'
+import Modal from '~/components/Modal.vue'
 const Validator = SimpleVueValidation.Validator
 export default {
   data() {
@@ -224,6 +225,9 @@ export default {
       privacyPolicyVisible: false,
       termsVisible: false
     }
+  },
+  components: {
+    Modal
   },
   methods: {
     submit() {
