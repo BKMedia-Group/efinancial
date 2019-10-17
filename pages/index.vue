@@ -204,11 +204,11 @@
                   pay the membership fee each month that I remain a member, and
                   that clicking is my electronic signature accepting the
                   programs
-                  <a href="javascript:void(0);" @click="isVisible1 = true">
+                  <a href="javascript:void(0)" @click="isVisible1 = true">
                     Terms and Conditions
                   </a>
                   , achknowledging receipt of the
-                  <a href="javascript:void(0);" @click="isVisible2 = true">
+                  <a href="javascript:void(0)" @click="isVisible2 = true">
                     Program Privacy Policy
                   </a>
                   and agreeing to the same.
