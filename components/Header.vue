@@ -12,8 +12,14 @@ header {
   padding: 30px 0;
   .container {
     display: flex;
+    align-items: center;
     img {
       margin-right: auto;
+      height: 50px;
+      width: auto;
+      @media (max-width: 480px) {
+        height: 30px;
+      }
     }
   }
 }

@@ -4,14 +4,10 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-body">
-            <slot></slot>
-          </div>
-          <div class="modal-footer">
-            <slot name="footer">
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
+            <div class="inner">
+              <button class="close" @click="$emit('close')">×</button>
+              <slot></slot>
+            </div>
           </div>
         </div>
       </div>
@@ -35,35 +31,53 @@
   vertical-align: middle;
 }
 .modal-container {
-  width: 300px;
+  max-width: 575px;
   margin: 0px auto;
-  padding: 20px 30px;
+  max-height: 675px;
+  overflow-y: auto;
+  padding: 10px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
+  .inner {
+    padding: 30px 35px 30px 30px;
+  }
 }
 .modal-body {
-  margin: 20px 0;
-}
-.modal-default-button {
-  float: right;
-}
-.modal-enter {
-  opacity: 0;
-}
-.modal-leave-active {
-  opacity: 0;
+  position: relative;
+  .close {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-size: 25px;
+    border: 0;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  p {
+    color: #4b4f54;
+    font-size: 11px;
+    line-height: 18px;
+  }
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+  strong {
+    display: block;
+  }
 }
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+h5 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  margin-bottom: 10px;
 }
 </style>
 <script>

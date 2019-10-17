@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="section_1">
+    <section class="section_1">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-9 text-center">
@@ -78,12 +78,12 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="form_section">
+    </section>
+    <section class="form_section">
       <div class="container">
         <h2 class="text-center">Get your Wellness Benefit today!</h2>
         <div class="row justify-content-center">
-          <div class="col-6">
+          <div class="col-7 text-center">
             <form
               id="app"
               @submit="checkForm()"
@@ -140,27 +140,27 @@
                   placeholder="Phone Number"
                 />
               </p>
-              <p>
+              <p class="cc_wrap">
                 <input
                   id="cc_number"
                   v-model="cc_number"
                   type="text"
                   name="cc_number"
-                  placeholder="Credit Card Number"
+                  placeholder="Credit Card Number*"
                 />
                 <input
                   id="exp_date"
                   v-model="exp_date"
                   type="text"
                   name="exp_date"
-                  placeholder="MM/YY"
+                  placeholder="MM/YY*"
                 />
                 <input
                   id="cvv"
                   v-model="cvv"
                   type="text"
                   name="cvv"
-                  placeholder="CVV"
+                  placeholder="CVV*"
                 />
               </p>
               <p class="form_image_required">
@@ -221,19 +221,114 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <section class="section_4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-7 text-center">
+            <h2>Your satisfaction is guaranteed.</h2>
+            <p>
+              If you are not happy with your Wellness Benefits, please call
+              <a href="tel:1-800-878-3733">1-800-878-3733</a> within 30 days of
+              the effective date for a full refund of the fees paid.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     <Modal :visible="isVisible1" @close="isVisible1 = false">
-      content 1
+      <h5>Terms, Conditions and Disclosures</h5>
+      <p>
+        This plan is not insurance. This is your agreement as Cardholder with
+        Coverdell & Company, Inc. (a "discount plan organization," "DPO"). It is
+        effective on the date of acceptance of Cardholder’s application for
+        enrollment in the Wellness Benefits Program (“Program”) and for the
+        period of your plan.
+      </p>
+      <p>
+        DPO shall provide Cardholder with a listing of participating providers.
+        Cardholder shall excuse DPO from any liability for errors in such
+        listings. Providers are subject to change without notice. Cardholder is
+        responsible for choice of provider, verification that the provider is a
+        current participant and for payment for goods and services. No portion
+        of any provider’s fee will be reimbursed or otherwise paid by DPO.
+        Cardholder is solely responsible for payment. Savings are based on the
+        provider’s usual fees or on national or regional fees for the service or
+        product. Actual savings will vary depending upon your location and the
+        specific products or services purchased. Providers may offer certain
+        products or services to the general public at prices lower than the
+        Program price. In that event, members will always be charged the lower
+        price. <strong>This is a discount program and not insurance.</strong>
+        Program discounts cannot be used in conjunction with any other network
+        based program.
+      </p>
+      <p>
+        Participating providers are solely responsible for the quality of
+        service or product purchased by Cardholder and DPO disclaims any
+        liability with respect to such matters. DPO reserves the right to modify
+        any benefits, including provider networks, included in Your Program. If
+        your state requires that we notify you of changes to your benefits, DPO
+        will do so.
+      </p>
+      <p>
+        Payment of membership fee is made by the billing source authorized by
+        you in accordance with the payment terms to which you agreed. DPO
+        reserves the right to increase or decrease the membership fee for each
+        renewal membership term effective upon renewal of your membership. To
+        change your method of payment, call the customer service number shown on
+        the membership I.D. card. Membership is not transferable. For individual
+        memberships, only you may use the membership. If you have an individual
+        plus one membership, only you plus one other individual may use the
+        membership. For family memberships, only you and anyone living in your
+        household may use the membership. Should a single member wish to add
+        family plan, call the
+      </p>
     </Modal>
     <Modal :visible="isVisible2" @close="isVisible2 = false">
-      content 2
+      <h5>Program Privacy Policy</h5>
+      <p>Effective June 2016</p>
+      <p>
+        This Privacy Policy (“Privacy Policy”) of Coverdell & Company, Inc.
+        (“We” “Us” “Our”) explains how We use Personal Identifiable Information
+        (“Personal Information”) Users submit and how it is thereafter stored in
+        the company’s database. In Our efforts to bring the customer (“Member”
+        “You”) of the membership or other program (“The Program”) the Program in
+        which You enrolled or requested information, We reserve the right to
+        make limited use of basic personal information which You have agreed to
+        provide to Us in connection with signing up and/or enrolling in the
+        Program. You consent to receive periodic communications from Us and/or
+        Our business affiliates regarding Your membership or inquiry, the
+        Program and its benefits as well as consent to be contacted by Us or any
+        third parties regarding other products or services that may be of
+        interest.
+      </p>
+      <p>
+        <strong>What information is collected?</strong> Generally, We gather
+        Personal Information that You expressly provide when You sign up to
+        receive information and/or enroll in the Program and collect information
+        about your transactions with us or our affiliates. This information
+        includes, for example, Your name, mailing address, e-mail address, and
+        phone number or some other unique personal identifier that We can use to
+        confirm sales and billing information (e.g. city of birth or mother's
+        maiden name). Occasionally, We may request other information from You
+        that may be used by Our Membership Services department to confirm
+        enrollment, update Your account or confirm Your order and so that We can
+        improve Our program and offerings. If You use one of Our websites, We
+        may collect data regarding Your traffic and use of the site. When You
+        visit Our websites, cookies are placed on Your hard disk which allows a
+        computer to remember who You are and make Your return visits to the
+        website more convenient. We recommend that You leave cookies turned onto
+        take full advantage of some of Our site features though they are not
+        required.
+      </p>
+      <p>
+        <strong>Who is collecting the information?</strong> The Program is
+        owned, marketed and/or distributed by Coverdell & Company, Inc. The
+        information collected is owned by Us and/or Our marketing partners
+        depending on who offered You the Program. Note that this Privacy Policy
+        outlines only Coverdell’s policy.
+      </p>
     </Modal>
-    <button type="button" name="button" @click="isVisible1 = true">
-      Show
-    </button>
-    <button type="button" name="button" @click="isVisible2 = true">
-      Show 2
-    </button>
   </div>
 </template>
 <script>
