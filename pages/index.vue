@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="section_1">
+    <section class="section_1">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-9 text-center">
@@ -78,33 +78,34 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="form_section">
+    </section>
+    <section class="form_section">
       <div class="container">
         <h2 class="text-center">Get your Wellness Benefit today!</h2>
         <div class="row justify-content-center">
-          <div class="col-6">
+          <div class="col-7 text-center">
             <Form />
           </div>
         </div>
       </div>
-    </div>
-    <Modal :visible="isVisible1" @close="isVisible1 = false">
-      content 1
-    </Modal>
-    <Modal :visible="isVisible2" @close="isVisible2 = false">
-      content 2
-    </Modal>
-    <button type="button" name="button" @click="isVisible1 = true">
-      Show
-    </button>
-    <button type="button" name="button" @click="isVisible2 = true">
-      Show 2
-    </button>
+    </section>
+    <section class="section_4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-7 text-center">
+            <h2>Your satisfaction is guaranteed.</h2>
+            <p>
+              If you are not happy with your Wellness Benefits, please call
+              <a href="tel:1-800-878-3733">1-800-878-3733</a> within 30 days of
+              the effective date for a full refund of the fees paid.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>
-import Modal from '~/components/Modal.vue'
 import Form from '~/components/Form.vue'
 export default {
   data() {
@@ -118,7 +119,6 @@ export default {
     submit() {}
   },
   components: {
-    Modal,
     Form
   }
 }

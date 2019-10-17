@@ -22,5 +22,8 @@ a {
   letter-spacing: 1px;
   line-height: 16px;
   text-align: center;
+  @media (max-width: 480px) {
+    padding: 11px 25px;
+  }
 }
 </style>
