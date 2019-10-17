@@ -68,6 +68,9 @@ p {
   font-size: 16px;
   line-height: 30px;
   margin-bottom: 20px;
+  @media (max-width: 480px) {
+    font-size: 17px;
+  }
 }
 a {
   color: #309abf;
@@ -210,7 +213,8 @@ section {
       .second {
         width: 20%;
         @media (max-width: 480px) {
-          width: 50%;
+          width: 48%;
+          margin-right: 2%;
           input {
             width: 100%!important;
           }
