@@ -72,8 +72,8 @@
             :class="{ error: validation.hasError('data.email') }"
           >
             <input
-              type="email"
               v-model="data.email"
+              type="email"
               placeholder="Email Address*"
             />
             <div class="message">{{ validation.firstError('data.email') }}</div>
@@ -86,22 +86,22 @@
         </div>
       </div>
       <div class="input cc">
-        <input
-          id="cc_number"
-          v-model="data.cc_number"
-          type="text"
-          placeholder="Credit Card Number"
-        />
-        <input
-          id="exp_date"
-          v-model="data.exp_date"
-          type="text"
-          placeholder="MM/YY"
-        />
-        <input id="cvv" v-model="data.cvv" type="text" placeholder="CVV" />
+        <div class="input" id="cc_number">
+          <input
+            v-model="data.cc_number"
+            type="text"
+            placeholder="Credit Card Number"
+          />
+        </div>
+        <div class="input" id="exp_date">
+          <input v-model="data.exp_date" type="text" placeholder="MM/YY" />
+        </div>
+        <div class="input" id="cvv">
+          <input v-model="data.cvv" type="text" placeholder="CVV" />
+        </div>
       </div>
       <div class="flex space-between">
-        <p style="padding-left: 45px">
+        <p class="credit-logos">
           <img src="~assets/images/cards.svg" alt="" />
         </p>
         <p>
@@ -110,7 +110,7 @@
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" v-model="data.activate" value="1" />
+          <input v-model="data.activate" type="checkbox" value="1" />
           By clicking this box I authorize the Program Administrator to hereby
           activate my Wellness Benefit Program. I understand that my Wellness
           Benefit monthly membership fee will be debited automatically each

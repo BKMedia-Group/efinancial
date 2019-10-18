@@ -57,24 +57,41 @@ form {
   }
   .cc {
     display: flex;
-    input {
+    flex-wrap: wrap;
+    margin: 0 -12.5px;
+    .input {
+      padding: 0 12.5px;
       flex: 1 0 calc(25% - 25px);
+      min-width: 175px;
     }
     #cc_number {
       flex: 1 0 50%;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right: 0 none;
+      min-width: 250px;
     }
-    #exp_date {
-      border-radius: 0;
-      border-right: 0 none;
-      border-left: 0 none;
-    }
-    #cvv {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left: 0 none;
+    @media (min-width: 552px) {
+      margin: 0;
+      .input {
+        padding: 0;
+        min-width: 115px;
+        input {
+          padding-right: 10px;
+        }
+      }
+      #cc_number input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 0 none;
+      }
+      #exp_date input {
+        border-radius: 0;
+        border-right: 0 none;
+        border-left: 0 none;
+      }
+      #cvv input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 0 none;
+      }
     }
   }
   .checkbox {
@@ -95,5 +112,10 @@ form {
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
+  }
+}
+@media (min-width: 551px) {
+  .credit-logos {
+    margin-left: 45px;
   }
 }
