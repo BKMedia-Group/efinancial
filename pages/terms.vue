@@ -24,7 +24,7 @@
           purchased. Providers may offer certain products or services to the
           general public at prices lower than the Program price. In that event,
           members will always be charged the lower price.
-          <strong>This is a discount program and not insurance.</strong>
+          <span>This is a discount program and not insurance.</span>
           Program discounts cannot be used in conjunction with any other network
           based program.
         </p>

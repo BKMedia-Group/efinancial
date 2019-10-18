@@ -1,65 +1,116 @@
 <template>
   <div>
     <form novalidate @submit.prevent="submit()">
-      <div :class="{ error: validation.hasError('data.firstName') }">
-        <input v-model="data.firstName" type="text" placeholder="First Name*" />
-        <div class="message">{{ validation.firstError('data.firstName') }}</div>
-        <input
-          v-model="data.lastName"
-          type="text"
-          placeholder="Last Name*"
-          required
-        />
-      </div>
-      <div>
-        <select v-model="data.gender">
-          <option diabled value="">Select Gender*</option>
-          <option>Vanilla Sky</option>
-          <option>Atomic Blonde</option>
-        </select>
-        <input
-          v-model="data.dob"
-          type="text"
-          placeholder="DOB: MM/DD/YYYY*"
-          required
-        />
-      </div>
-      <div>
-        <div :class="{ error: validation.hasError('data.email') }">
-          <input
-            type="email"
-            v-model="data.email"
-            placeholder="Email Address*"
-          />
-          <div class="message">{{ validation.firstError('data.email') }}</div>
+      <div class="form-row">
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.firstName') }"
+          >
+            <input
+              v-model="data.firstName"
+              type="text"
+              placeholder="First Name*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.firstName') }}
+            </div>
+          </div>
         </div>
-        <div>
-          <input v-model="data.phone" type="tel" placeholder="Phone Number" />
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.lastName') }"
+          >
+            <input
+              v-model="data.lastName"
+              type="text"
+              placeholder="Last Name*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.lastName') }}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="cc_wrap">
+      <div class="form-row">
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.gender') }"
+          >
+            <select v-model="data.gender" name="gender">
+              <option diabled value="">Select Gender*</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            <div class="message">
+              {{ validation.firstError('data.gender') }}
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.gender') }"
+          >
+            <input
+              v-model="data.dob"
+              type="date"
+              placeholder="DOB: MM/DD/YYYY*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.dob') }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.email') }"
+          >
+            <input
+              type="email"
+              v-model="data.email"
+              placeholder="Email Address*"
+            />
+            <div class="message">{{ validation.firstError('data.email') }}</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input">
+            <input v-model="data.phone" type="tel" placeholder="Phone Number" />
+          </div>
+        </div>
+      </div>
+      <div class="input cc">
         <input
+          id="cc_number"
           v-model="data.cc_number"
           type="text"
           placeholder="Credit Card Number"
         />
-        <input v-model="data.exp_date" type="text" placeholder="MM/YY" />
-        <input v-model="data.cvv" type="text" placeholder="CVV" />
+        <input
+          id="exp_date"
+          v-model="data.exp_date"
+          type="text"
+          placeholder="MM/YY"
+        />
+        <input id="cvv" v-model="data.cvv" type="text" placeholder="CVV" />
       </div>
-      <div class="form_image_required">
-        <img src="~assets/images/cards.svg" alt="" />
-        <span>
+      <div class="flex space-between">
+        <p style="padding-left: 45px">
+          <img src="~assets/images/cards.svg" alt="" />
+        </p>
+        <p>
           * Denote required fields
-        </span>
+        </p>
       </div>
-      <div>
+      <div class="checkbox">
         <label>
-          <input
-            id="checkbox1"
-            type="checkbox"
-            v-model="data.activate"
-            value=""
-          />
+          <input type="checkbox" v-model="data.activate" value="1" />
           By clicking this box I authorize the Program Administrator to hereby
           activate my Wellness Benefit Program. I understand that my Wellness
           Benefit monthly membership fee will be debited automatically each
@@ -73,13 +124,10 @@
           service at 1-800-878-3733. The Wellness Benefit Program is not
           insurance.
         </label>
+      </div>
+      <div class="checkbox">
         <label>
-          <input
-            id="checkbox2"
-            type="checkbox"
-            v-model="data.membership"
-            value=""
-          />
+          <input type="checkbox" v-model="data.membership" value="" />
           By clicking on the button, I agree to start my membership and pay the
           membership fee each month that I remain a member, and that clicking is
           my electronic signature accepting the programs
@@ -119,7 +167,7 @@
         specific products or services purchased. Providers may offer certain
         products or services to the general public at prices lower than the
         Program price. In that event, members will always be charged the lower
-        price. <strong>This is a discount program and not insurance.</strong>
+        price. <span>This is a discount program and not insurance.</span>
         Program discounts cannot be used in conjunction with any other network
         based program.
       </p>
@@ -202,7 +250,9 @@ const Validator = SimpleVueValidation.Validator
 export default {
   data() {
     return {
-      data: {},
+      data: {
+        gender: ''
+      },
       privacyPolicyVisible: false,
       termsVisible: false
     }
@@ -228,7 +278,13 @@ export default {
     'data.firstName': (value = '') => {
       return Validator.value(value).required()
     },
+    'data.lastName': (value = '') => {
+      return Validator.value(value).required()
+    },
     'data.gender': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.dob': (value = '') => {
       return Validator.value(value).required()
     }
   }
