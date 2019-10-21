@@ -37,6 +37,70 @@
         <div class="col">
           <div
             class="input"
+            :class="{ error: validation.hasError('data.Address.Address1') }"
+          >
+            <input
+              v-model="data.Address.Address1"
+              type="text"
+              placeholder="Address*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.Address.Address1') }}
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.Address.City') }"
+          >
+            <input
+              v-model="data.Address.City"
+              type="text"
+              placeholder="City*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.Address.City') }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.Address.PostalCode') }"
+          >
+            <input
+              v-model="data.Address.PostalCode"
+              type="text"
+              placeholder="PostalCode*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.Address.PostalCode') }}
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.Address.State') }"
+          >
+            <input
+              v-model="data.Address.State"
+              type="text"
+              placeholder="Last Name*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.Address.State') }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div
+            class="input"
             :class="{ error: validation.hasError('data.Person.Gender') }"
           >
             <select v-model="data.Person.Gender">
@@ -52,7 +116,7 @@
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.Person.Gender') }"
+            :class="{ error: validation.hasError('data.Person.DateOfBirth') }"
           >
             <cleave
               v-model="data.Person.DateOfBirth"
@@ -109,13 +173,6 @@
             :options="{ date: true, datePattern: ['m', 'y'] }"
             placeholder="MM/YY"
           ></cleave>
-        </div>
-        <div class="input" id="cvv">
-          <input
-            v-model="data.Billing.CardVerificationValue"
-            type="text"
-            placeholder="CVV"
-          />
         </div>
       </div>
       <div class="flex space-between">
@@ -276,11 +333,18 @@ export default {
           Gender: 'Male',
           PhoneNumber: '1241241245',
           Email: 'josh@bkmediagroup.com',
-          DateOfBirth: '1985-03-04'
+          DateOfBirth: '03-04-1985'
+        },
+        Address: {
+          Address1: '123 Happy Lane',
+          Address2: '',
+          City: 'Lafayette',
+          State: 'CO',
+          PostalCode: '80027',
+          CountryCode: 'US'
         },
         Billing: {
-          AccountNumber: '4111111111111111',
-          CardVerificationValue: '123'
+          AccountNumber: '4111111111111111'
         },
         exp_date: '12/21'
       },
@@ -331,6 +395,9 @@ export default {
       return Validator.value(value).required()
     },
     'data.Person.DateOfBirth': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Person.Address1': (value = '') => {
       return Validator.value(value).required()
     }
   }
