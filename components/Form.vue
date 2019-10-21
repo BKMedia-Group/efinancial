@@ -41,8 +41,8 @@
           >
             <select v-model="data.Person.Gender">
               <option diabled value="">Select Person.Gender*</option>
-              <option>Male</option>
-              <option>Female</option>
+              <option value="77">Male</option>
+              <option value="70">Female</option>
             </select>
             <div class="message">
               {{ validation.firstError('data.Person.Gender') }}
@@ -59,7 +59,7 @@
               placeholder="Date Of Birth: MM/DD/YYYY*"
               :options="{
                 date: true,
-                datePatter: ['m', 'd', 'Y'],
+                datePattern: ['m', 'd', 'Y'],
                 delimiter: '/'
               }"
             ></cleave>
@@ -273,10 +273,10 @@ export default {
         Person: {
           FirstName: 'Josh',
           LastName: 'Horner',
-          Gender: 'Male',
-          PhoneNumber: '1241241245',
+          Gender: '77',
+          PhoneNumber: '7241241245',
           Email: 'josh@bkmediagroup.com',
-          DateOfBirth: '1985-03-04'
+          DateOfBirth: '03041985'
         },
         Billing: {
           AccountNumber: '4111111111111111',
@@ -297,9 +297,23 @@ export default {
     Modal
   },
   methods: {
+    methodOfPayment() {
+      switch (this.ccType) {
+        case 'visa':
+          return 5
+        case 'amex':
+          return 1
+        case 'mastercard':
+          return 4
+        case 'discover':
+          return 2
+      }
+    },
     submit() {
       this.$validate().then((success) => {
         if (success) {
+          const postData = this.data
+          postData.Billing.MethodOfPayment = this.methodOfPayment()
           axios.post('', this.data).then(
             (response) => {
               console.log(response)
