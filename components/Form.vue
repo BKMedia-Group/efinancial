@@ -70,6 +70,7 @@
             :class="{ error: validation.hasError('data.Person.Address.State') }"
           >
             <select v-model="data.Person.Address.State">
+              <option value="">State*</option>
               <option
                 v-for="(state, abbr) in usStates"
                 :value="abbr"
@@ -163,13 +164,23 @@
           </div>
         </div>
       </div>
-      <div class="input cc">
+      <div
+        class="input cc"
+        :class="{
+          error:
+            validation.hasError('data.Billing.AccountNumber') ||
+            validation.hasError('data.exp_date')
+        }"
+      >
         <div class="input" id="cc_number">
           <cleave
             v-model="data.Billing.AccountNumber"
             :options="ccOptions"
             placeholder="Credit Card Number"
           ></cleave>
+          <div class="message">
+            {{ validation.firstError('data.Billing.AccountNumber') }}
+          </div>
         </div>
         <div class="input" id="exp_date">
           <cleave
@@ -177,6 +188,9 @@
             :options="{ date: true, datePattern: ['m', 'y'] }"
             placeholder="MM/YY"
           ></cleave>
+          <div class="message">
+            {{ validation.firstError('data.exp_date') }}
+          </div>
         </div>
       </div>
       <div class="flex space-between">
@@ -359,25 +373,14 @@ export default {
     return {
       data: {
         Person: {
-          FirstName: 'Josh',
-          LastName: 'Horner',
-          Gender: '77',
-          PhoneNumber: '7241241245',
-          Email: 'josh@bkmediagroup.com',
-          DateOfBirth: '03041985',
           Address: {
-            Address1: '123 Happy Lane',
-            Address2: '',
-            City: 'Lafayette',
-            State: 'CO',
-            PostalCode: '80027',
-            CountryCode: 'US'
-          }
+            State: ''
+          },
+          Gender: '',
+          DateOfBirth: ''
         },
-        Billing: {
-          AccountNumber: '4111111111111111'
-        },
-        exp_date: '12/21'
+        Billing: {},
+        exp_date: ''
       },
       privacyPolicyVisible: false,
       termsVisible: false,
@@ -476,6 +479,12 @@ export default {
       return Validator.value(value).required()
     },
     'data.Person.Address.PostalCode': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Billing.AccountNumber': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.exp_date': (value = '') => {
       return Validator.value(value).required()
     },
     activate: (value = '') => {
