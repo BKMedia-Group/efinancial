@@ -5,30 +5,30 @@
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.firstName') }"
+            :class="{ error: validation.hasError('data.Person.FirstName') }"
           >
             <input
-              v-model="data.firstName"
+              v-model="data.Person.FirstName"
               type="text"
               placeholder="First Name*"
             />
             <div class="message">
-              {{ validation.firstError('data.firstName') }}
+              {{ validation.firstError('data.Person.FirstName') }}
             </div>
           </div>
         </div>
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.lastName') }"
+            :class="{ error: validation.hasError('data.Person.LastName') }"
           >
             <input
-              v-model="data.lastName"
+              v-model="data.Person.LastName"
               type="text"
               placeholder="Last Name*"
             />
             <div class="message">
-              {{ validation.firstError('data.lastName') }}
+              {{ validation.firstError('data.Person.LastName') }}
             </div>
           </div>
         </div>
@@ -37,30 +37,34 @@
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.gender') }"
+            :class="{ error: validation.hasError('data.Person.Gender') }"
           >
-            <select v-model="data.gender" name="gender">
-              <option diabled value="">Select Gender*</option>
+            <select v-model="data.Person.Gender">
+              <option diabled value="">Select Person.Gender*</option>
               <option>Male</option>
               <option>Female</option>
             </select>
             <div class="message">
-              {{ validation.firstError('data.gender') }}
+              {{ validation.firstError('data.Person.Gender') }}
             </div>
           </div>
         </div>
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.gender') }"
+            :class="{ error: validation.hasError('data.Person.Gender') }"
           >
-            <input
-              v-model="data.dob"
-              type="date"
-              placeholder="DOB: MM/DD/YYYY*"
-            />
+            <cleave
+              v-model="data.Person.DateOfBirth"
+              placeholder="Date Of Birth: MM/DD/YYYY*"
+              :options="{
+                date: true,
+                datePatter: ['m', 'd', 'Y'],
+                delimiter: '/'
+              }"
+            ></cleave>
             <div class="message">
-              {{ validation.firstError('data.dob') }}
+              {{ validation.firstError('data.Person.DateOfBirth') }}
             </div>
           </div>
         </div>
@@ -69,35 +73,49 @@
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.email') }"
+            :class="{ error: validation.hasError('data.Person.Email') }"
           >
             <input
-              v-model="data.email"
-              type="email"
+              v-model="data.Person.Email"
+              type="Email"
               placeholder="Email Address*"
             />
-            <div class="message">{{ validation.firstError('data.email') }}</div>
+            <div class="message">
+              {{ validation.firstError('data.Person.Email') }}
+            </div>
           </div>
         </div>
         <div class="col">
           <div class="input">
-            <input v-model="data.phone" type="tel" placeholder="Phone Number" />
+            <cleave
+              v-model="data.Person.PhoneNumber"
+              :options="{ phone: true, phoneRegionCode: 'us', delimiter: '-' }"
+              placeholder="Phone Number"
+            ></cleave>
           </div>
         </div>
       </div>
       <div class="input cc">
         <div class="input" id="cc_number">
-          <input
-            v-model="data.cc_number"
-            type="text"
+          <cleave
+            v-model="data.Billing.AccountNumber"
+            :options="ccOptions"
             placeholder="Credit Card Number"
-          />
+          ></cleave>
         </div>
         <div class="input" id="exp_date">
-          <input v-model="data.exp_date" type="text" placeholder="MM/YY" />
+          <cleave
+            v-model="data.exp_date"
+            :options="{ date: true, datePattern: ['m', 'y'] }"
+            placeholder="MM/YY"
+          ></cleave>
         </div>
         <div class="input" id="cvv">
-          <input v-model="data.cvv" type="text" placeholder="CVV" />
+          <input
+            v-model="data.Billing.CardVerificationValue"
+            type="text"
+            placeholder="CVV"
+          />
         </div>
       </div>
       <div class="flex space-between">
@@ -246,15 +264,33 @@
 <script>
 import SimpleVueValidation from 'simple-vue-validator'
 import Modal from '~/components/Modal.vue'
+import axios from '~/plugins/axios'
 const Validator = SimpleVueValidation.Validator
 export default {
   data() {
     return {
       data: {
-        gender: ''
+        Person: {
+          FirstName: 'Josh',
+          LastName: 'Horner',
+          Gender: 'Male',
+          PhoneNumber: '1241241245',
+          Email: 'josh@bkmediagroup.com',
+          DateOfBirth: '1985-03-04'
+        },
+        Billing: {
+          AccountNumber: '4111111111111111',
+          CardVerificationValue: '123'
+        },
+        exp_date: '12/21'
       },
       privacyPolicyVisible: false,
-      termsVisible: false
+      termsVisible: false,
+      ccOptions: {
+        creditCard: true,
+        onCreditCardTypeChanged: this.ccChanged
+      },
+      ccType: 'unknown'
     }
   },
   components: {
@@ -264,27 +300,37 @@ export default {
     submit() {
       this.$validate().then((success) => {
         if (success) {
-          alert('success')
+          axios.post('', this.data).then(
+            (response) => {
+              console.log(response)
+            },
+            (error) => {
+              console.log(error)
+            }
+          )
         }
       })
+    },
+    ccChanged(type) {
+      this.ccType = type
     }
   },
   validators: {
-    'data.email': (value = '') => {
+    'data.Person.Email': (value = '') => {
       return Validator.value(value)
         .required()
         .email()
     },
-    'data.firstName': (value = '') => {
+    'data.Person.FirstName': (value = '') => {
       return Validator.value(value).required()
     },
-    'data.lastName': (value = '') => {
+    'data.Person.LastName': (value = '') => {
       return Validator.value(value).required()
     },
-    'data.gender': (value = '') => {
+    'data.Person.Gender': (value = '') => {
       return Validator.value(value).required()
     },
-    'data.dob': (value = '') => {
+    'data.Person.DateOfBirth': (value = '') => {
       return Validator.value(value).required()
     }
   }

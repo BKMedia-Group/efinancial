@@ -31,7 +31,8 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/simple-vue-validator'
+    '~/plugins/simple-vue-validator',
+    '~/plugins/cleave'
   ],
   /*
    ** Nuxt.js dev-modules
