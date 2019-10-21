@@ -109,7 +109,7 @@
             :class="{ error: validation.hasError('data.Person.Gender') }"
           >
             <select v-model="data.Person.Gender">
-              <option diabled value="">Select Person.Gender*</option>
+              <option diabled value="">Select Gender*</option>
               <option value="77">Male</option>
               <option value="70">Female</option>
             </select>
