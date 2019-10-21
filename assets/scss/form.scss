@@ -56,6 +56,18 @@ form {
       padding: 0 ($form-spacing/2);
       min-width: 250px;
     }
+    #city {
+      flex-basis: 33%;
+      min-width: 175px;
+    }
+    #state {
+      flex-basis: 33%;
+      min-width: 175px;
+    }
+    #zip {
+      flex-basis: 33%;
+      min-width: 175px;
+    }
   }
   .cc {
     display: flex;
@@ -63,7 +75,7 @@ form {
     margin: 0 -12.5px;
     .input {
       padding: 0 12.5px;
-      flex: 1 0 calc(25% - 25px);
+      flex: 1 0 calc(50% - 25px);
       min-width: 175px;
     }
     #cc_number {
@@ -85,11 +97,6 @@ form {
         border-right: 0 none;
       }
       #exp_date input {
-        border-radius: 0;
-        border-right: 0 none;
-        border-left: 0 none;
-      }
-      #cvv input {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-left: 0 none;
@@ -114,10 +121,21 @@ form {
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
+    &:disabled {
+      background: #ff9e6e;
+    }
   }
 }
 @media (min-width: 551px) {
   .credit-logos {
     margin-left: 45px;
   }
+}
+.global-error {
+  border: 1px solid red;
+  color: red;
+  padding: 20px;
+  border-radius: 5px;
+  background: #ffbebe;
+  margin-bottom: 25px;
 }

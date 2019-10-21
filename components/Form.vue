@@ -33,6 +33,74 @@
           </div>
         </div>
       </div>
+      <div
+        class="input"
+        :class="{
+          error: validation.hasError('data.Person.Address.Address1')
+        }"
+      >
+        <input
+          v-model="data.Person.Address.Address1"
+          type="text"
+          placeholder="Address*"
+        />
+        <div class="message">
+          {{ validation.firstError('data.Person.Address.Address1') }}
+        </div>
+      </div>
+      <div class="form-row city-state-zip">
+        <div class="col" id="city">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.Person.Address.City') }"
+          >
+            <input
+              v-model="data.Person.Address.City"
+              type="text"
+              placeholder="City*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.Person.Address.City') }}
+            </div>
+          </div>
+        </div>
+        <div class="col" id="state">
+          <div
+            class="input"
+            :class="{ error: validation.hasError('data.Person.Address.State') }"
+          >
+            <select v-model="data.Person.Address.State">
+              <option
+                v-for="(state, abbr) in usStates"
+                :value="abbr"
+                :key="abbr"
+              >
+                {{ state }}
+              </option>
+            </select>
+            <div class="message">
+              {{ validation.firstError('data.Person.Address.State') }}
+            </div>
+          </div>
+        </div>
+        <div class="col" id="zip">
+          <div
+            class="input"
+            :class="{
+              error: validation.hasError('data.Person.Address.PostalCode')
+            }"
+          >
+            <input
+              v-model="data.Person.Address.PostalCode"
+              type="text"
+              placeholder="PostalCode*"
+            />
+            <div class="message">
+              {{ validation.firstError('data.Person.Address.PostalCode') }}
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="form-row">
         <div class="col">
           <div
@@ -52,7 +120,7 @@
         <div class="col">
           <div
             class="input"
-            :class="{ error: validation.hasError('data.Person.Gender') }"
+            :class="{ error: validation.hasError('data.Person.DateOfBirth') }"
           >
             <cleave
               v-model="data.Person.DateOfBirth"
@@ -110,13 +178,6 @@
             placeholder="MM/YY"
           ></cleave>
         </div>
-        <div class="input" id="cvv">
-          <input
-            v-model="data.Billing.CardVerificationValue"
-            type="text"
-            placeholder="CVV"
-          />
-        </div>
       </div>
       <div class="flex space-between">
         <p class="credit-logos">
@@ -126,9 +187,14 @@
           * Denote required fields
         </p>
       </div>
-      <div class="checkbox">
+      <div
+        class="checkbox"
+        :class="{
+          error: validation.hasError('activate')
+        }"
+      >
         <label>
-          <input v-model="data.activate" type="checkbox" value="1" />
+          <input v-model="activate" type="checkbox" />
           By clicking this box I authorize the Program Administrator to hereby
           activate my Wellness Benefit Program. I understand that my Wellness
           Benefit monthly membership fee will be debited automatically each
@@ -142,10 +208,18 @@
           service at 1-800-878-3733. The Wellness Benefit Program is not
           insurance.
         </label>
+        <div class="message">
+          {{ validation.firstError('activate') }}
+        </div>
       </div>
-      <div class="checkbox">
+      <div
+        class="checkbox"
+        :class="{
+          error: validation.hasError('membership')
+        }"
+      >
         <label>
-          <input type="checkbox" v-model="data.membership" value="" />
+          <input v-model="membership" type="checkbox" />
           By clicking on the button, I agree to start my membership and pay the
           membership fee each month that I remain a member, and that clicking is
           my electronic signature accepting the programs
@@ -158,11 +232,24 @@
           </a>
           and agreeing to the same.
         </label>
+        <div class="message">
+          {{ validation.firstError('membership') }}
+        </div>
+      </div>
+      <div v-if="globalError != ''" class="global-error">
+        {{ globalError }}
       </div>
       <div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" :disabled="submitting" />
       </div>
     </form>
+    <Modal :visible="successVisible" @close="successVisible = false">
+      <h5>Contratulations on your enrollment.</h5>
+      <p>
+        Thank you for signing up! Please be on the lookout for your offline
+        materials.
+      </p>
+    </Modal>
     <Modal :visible="termsVisible" @close="termsVisible = false">
       <h5>Terms, Conditions and Disclosures</h5>
       <p>
@@ -265,6 +352,7 @@
 import SimpleVueValidation from 'simple-vue-validator'
 import Modal from '~/components/Modal.vue'
 import axios from '~/plugins/axios'
+import usStates from '~/plugins/states'
 const Validator = SimpleVueValidation.Validator
 export default {
   data() {
@@ -276,21 +364,34 @@ export default {
           Gender: '77',
           PhoneNumber: '7241241245',
           Email: 'josh@bkmediagroup.com',
-          DateOfBirth: '03041985'
+          DateOfBirth: '03041985',
+          Address: {
+            Address1: '123 Happy Lane',
+            Address2: '',
+            City: 'Lafayette',
+            State: 'CO',
+            PostalCode: '80027',
+            CountryCode: 'US'
+          }
         },
         Billing: {
-          AccountNumber: '4111111111111111',
-          CardVerificationValue: '123'
+          AccountNumber: '4111111111111111'
         },
         exp_date: '12/21'
       },
       privacyPolicyVisible: false,
       termsVisible: false,
+      successVisible: false,
       ccOptions: {
         creditCard: true,
         onCreditCardTypeChanged: this.ccChanged
       },
-      ccType: 'unknown'
+      ccType: 'unknown',
+      usStates,
+      globalError: '',
+      activate: false,
+      membership: false,
+      submitting: false
     }
   },
   components: {
@@ -310,20 +411,38 @@ export default {
       }
     },
     submit() {
+      this.globalError = ''
       this.$validate().then((success) => {
         if (success) {
+          this.submitting = true
           const postData = this.data
           postData.Billing.MethodOfPayment = this.methodOfPayment()
-          axios.post('', this.data).then(
-            (response) => {
-              console.log(response)
-            },
-            (error) => {
-              console.log(error)
-            }
-          )
+          axios
+            .post('', this.data)
+            .then((response) => {
+              this.reset()
+              this.successVisible = true
+            })
+            .catch((error) => {
+              console.log(error.response)
+              this.globalError = error.response.data.ErrorMessage
+            })
+            .finally(() => {
+              this.submitting = false
+            })
         }
       })
+    },
+    reset() {
+      this.data = {
+        Person: {
+          Address: {}
+        },
+        Billing: {}
+      }
+      this.activate = false
+      this.membership = false
+      this.validation.reset()
     },
     ccChanged(type) {
       this.ccType = type
@@ -345,6 +464,30 @@ export default {
       return Validator.value(value).required()
     },
     'data.Person.DateOfBirth': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Person.Address.Address1': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Person.Address.City': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Person.Address.State': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Person.Address.PostalCode': (value = '') => {
+      return Validator.value(value).required()
+    },
+    activate: (value = '') => {
+      if (!value) {
+        value = ''
+      }
+      return Validator.value(value).required()
+    },
+    membership: (value = '') => {
+      if (!value) {
+        value = ''
+      }
       return Validator.value(value).required()
     }
   }
