@@ -439,9 +439,14 @@ export default {
     reset() {
       this.data = {
         Person: {
-          Address: {}
+          Address: {
+            State: ''
+          },
+          Gender: '',
+          DateOfBirth: ''
         },
-        Billing: {}
+        Billing: {},
+        exp_date: ''
       }
       this.activate = false
       this.membership = false
