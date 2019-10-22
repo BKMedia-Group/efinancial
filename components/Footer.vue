@@ -17,10 +17,12 @@
         provided. The licensed discount plan organization is Coverdell &
         Company, Inc., at 8770 W. Bryn Mawr, Suite 1000, Chicago, IL 60631,
         1-800-308-0374. To view a list of participating providers, visit
-        www.findbestbenefits.com and enter Promo Code 575200. You have the right
-        to cancel this plan within 30 days of the effective date for a full
-        refund of fees paid. Such refunds are issued within 30 days of
-        cancellation.
+        www.findbestbenefits.com and enter Promo Code 575200.
+        <strong>
+          You have the right to cancel this plan within 30 days of the effective
+          date for a full refund of fees paid.
+        </strong>
+        Such refunds are issued within 30 days of cancellation.
       </p>
       <div class="bottom">
         <p>©2019 Efinancial, LLC. All Rights Reserved.</p>

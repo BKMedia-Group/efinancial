@@ -26,6 +26,14 @@
   display: table;
   transition: opacity 0.3s ease;
 }
+.large {
+  font-size: 13px;
+  font-weight: bold;
+  &.center {
+    text-align: center;
+    display: block;
+  }
+}
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;

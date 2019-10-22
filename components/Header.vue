@@ -1,7 +1,9 @@
 <template>
   <header>
     <div class="container">
-      <img src="~/assets/images/logo.svg" />
+      <a href="/" class="logo">
+        <img src="~/assets/images/logo.svg" />
+      </a>
       <Button url="#">Enroll Today</Button>
     </div>
   </header>
@@ -13,12 +15,14 @@ header {
   .container {
     display: flex;
     align-items: center;
-    img {
+    a.logo {
       margin-right: auto;
-      height: 50px;
-      width: auto;
-      @media (max-width: 480px) {
-        height: 30px;
+      img {
+        height: 50px;
+        width: auto;
+        @media (max-width: 480px) {
+          height: 30px;
+        }
       }
     }
   }
