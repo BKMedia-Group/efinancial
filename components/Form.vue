@@ -258,7 +258,7 @@
       </div>
     </form>
     <Modal :visible="successVisible" @close="successVisible = false">
-      <h5>Contratulations on your enrollment.</h5>
+      <h5>Congratulations on your enrollment.</h5>
       <p>
         Thank you for signing up! Please be on the lookout for your offline
         materials.
