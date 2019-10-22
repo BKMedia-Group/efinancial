@@ -79,7 +79,7 @@
         </div>
       </div>
     </section>
-    <section class="form_section">
+    <section id="form" class="form_section">
       <div class="container">
         <h2 class="text-center">Get your Wellness Benefit today!</h2>
         <div class="row justify-content-center">
