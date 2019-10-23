@@ -27,5 +27,8 @@ a {
   @media (max-width: 480px) {
     padding: 11px 25px;
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

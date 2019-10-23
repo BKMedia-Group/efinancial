@@ -1,6 +1,9 @@
 <template>
   <div>
-    <form novalidate @submit.prevent="submit()">
+    <form novalidate @submit.prevent="submit()" id="form">
+      <div v-if="globalError != ''" class="global-error">
+        {{ globalError }}
+      </div>
       <div class="form-row">
         <div class="col">
           <div
@@ -69,7 +72,10 @@
             class="input"
             :class="{ error: validation.hasError('data.Person.Address.State') }"
           >
-            <select v-model="data.Person.Address.State">
+            <select
+              v-model="data.Person.Address.State"
+              ref="data.Person.Address.State"
+            >
               <option value="">State*</option>
               <option
                 v-for="(state, abbr) in usStates"
@@ -175,6 +181,7 @@
         <div class="input" id="cc_number">
           <cleave
             v-model="data.Billing.AccountNumber"
+            ref="data.Billing.AccountNumber"
             :options="ccOptions"
             placeholder="Credit Card Number"
           ></cleave>
@@ -185,6 +192,7 @@
         <div class="input" id="exp_date">
           <cleave
             v-model="data.exp_date"
+            ref="data.exp_date"
             :options="{ date: true, datePattern: ['m', 'y'] }"
             placeholder="MM/YY"
           ></cleave>
@@ -249,9 +257,6 @@
         <div class="message">
           {{ validation.firstError('membership') }}
         </div>
-      </div>
-      <div v-if="globalError != ''" class="global-error">
-        {{ globalError }}
       </div>
       <div>
         <input type="submit" value="Submit" :disabled="submitting" />
@@ -547,6 +552,7 @@ import SimpleVueValidation from 'simple-vue-validator'
 import Modal from '~/components/Modal.vue'
 import axios from '~/plugins/axios'
 import usStates from '~/plugins/states'
+const VueScrollTo = require('vue-scrollto')
 const Validator = SimpleVueValidation.Validator
 export default {
   data() {
@@ -607,12 +613,15 @@ export default {
               this.successVisible = true
             })
             .catch((error) => {
-              console.log(error.response)
+              VueScrollTo.scrollTo('#form', 500)
               this.globalError = error.response.data.ErrorMessage
             })
             .finally(() => {
               this.submitting = false
             })
+        } else {
+          this.globalError = 'Please correct the highlighted fields below'
+          VueScrollTo.scrollTo('#form', 500)
         }
       })
     },

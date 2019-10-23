@@ -4,7 +4,7 @@
       <a href="/" class="logo">
         <img src="~/assets/images/logo.svg" />
       </a>
-      <Button url="#form">Enroll Today</Button>
+      <Button v-scroll-to="'#form'">Enroll Today</Button>
     </div>
   </header>
 </template>
