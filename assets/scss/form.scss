@@ -75,7 +75,7 @@ form {
     margin: 0 -12.5px;
     .input {
       padding: 0 12.5px;
-      flex: 1 0 calc(50% - 25px);
+      flex: 1 0 calc(25% - 25px);
       min-width: 175px;
     }
     #cc_number {
@@ -97,6 +97,11 @@ form {
         border-right: 0 none;
       }
       #exp_date input {
+        border-radius: 0;
+        border-right: 0 none;
+        border-left: 0 none;
+      }
+      #cvv input {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-left: 0 none;
@@ -110,6 +115,7 @@ form {
     label {
       input {
         margin-left: -25px;
+        margin-top: 7px;
         float: left;
       }
     }
@@ -124,6 +130,17 @@ form {
     &:disabled {
       background: #ff9e6e;
     }
+  }
+}
+.credit-logos {
+  img {
+    transition: all ease 400ms;
+  }
+  img.not {
+    filter: grayscale(100%);
+  }
+  img.not.is {
+    filter: grayscale(0);
   }
 }
 @media (min-width: 551px) {

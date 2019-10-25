@@ -175,7 +175,8 @@
         :class="{
           error:
             validation.hasError('data.Billing.AccountNumber') ||
-            validation.hasError('data.exp_date')
+            validation.hasError('data.exp_date') ||
+            validation.hasError('data.Billing.CardVerificationValue')
         }"
       >
         <div class="input" id="cc_number">
@@ -200,10 +201,39 @@
             {{ validation.firstError('data.exp_date') }}
           </div>
         </div>
+        <div class="input" id="cvv">
+          <input
+            v-model="data.Billing.CardVerificationValue"
+            type="text"
+            placeholder="CVV"
+          />
+          <div class="message">
+            {{ validation.firstError('data.Billing.CardVerificationValue') }}
+          </div>
+        </div>
       </div>
       <div class="flex space-between">
         <p class="credit-logos">
-          <img src="~assets/images/cards.svg" alt="" />
+          <img
+            src="~assets/images/mastercard.png"
+            :class="{ not: ccType != 'unknown', is: ccType == 'mastercard' }"
+            alt=""
+          />
+          <img
+            src="~assets/images/visa.png"
+            :class="{ not: ccType != 'unknown', is: ccType == 'visa' }"
+            alt=""
+          />
+          <img
+            src="~assets/images/discover.png"
+            :class="{ not: ccType != 'unknown', is: ccType == 'discover' }"
+            alt=""
+          />
+          <img
+            src="~assets/images/americanexpress.png"
+            :class="{ not: ccType != 'unknown', is: ccType == 'amex' }"
+            alt=""
+          />
         </p>
         <p>
           * Denote required fields
@@ -679,6 +709,9 @@ export default {
       return Validator.value(value).required()
     },
     'data.exp_date': (value = '') => {
+      return Validator.value(value).required()
+    },
+    'data.Billing.CardVerificationValue': (value = '') => {
       return Validator.value(value).required()
     },
     activate: (value = '') => {
