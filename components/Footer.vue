@@ -15,7 +15,7 @@
         who have contracted with the discount plan organization. The range of
         discounts will vary depending on the provider type and services
         provided. The licensed discount plan organization is Coverdell &
-        Company, Inc., at 8770 W. Bryn Mawr, Suite 1000, Chicago, IL 60631,
+        Company, Inc., at 2850 W. Golf Road, Rolling Meadows, IL 60008,
         1-800-308-0374. To view a list of participating providers, visit
         www.findbestbenefits.com and enter Promo Code 575200.
         <strong>

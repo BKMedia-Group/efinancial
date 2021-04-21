@@ -53,7 +53,7 @@
         <p>
           <span>General Complaint Procedure.</span> Complaints of any nature may
           be filed with Coverdell & Company, Inc. the discount plan organization
-          at 8770 W. Bryn Mawr, Suite 1000, Chicago, IL 60631. Complaints will
+          at 2850 W. Golf Road, Rolling Meadows, IL 60008. Complaints will
           be acknowledged in writing within 5 business days and will be resolved
           in writing to you within 30 calendar days. Should you remain
           dissatisfied with the results from your complaint with the discount
@@ -67,7 +67,7 @@
           any time by logging in to www.findbestbenefits.com and submitting a
           cancellation request on the Contact Us page, calling us at the toll
           free number on your membership card, or you may notify us in writing
-          at Member Services, 8770 W. Bryn Mawr, Suite 1000, Chicago, IL 60631.
+          at Member Services, 2850 W. Golf Road, Rolling Meadows, IL 60008.
           Your cancellation will be effective promptly upon the receipt of your
           cancellation notice and you will no longer be billed for your
           membership. DPO reserves the right to terminate your membership at any
@@ -127,7 +127,7 @@
           contracted with the discount plan organization. The range of discounts
           will vary depending on the provider type and services provided. The
           licensed discount plan organization is Coverdell & Company, Inc., at
-          8770 W. Bryn Mawr, Suite 1000, Chicago, IL 60631, 1-800-308-0374. To
+          2850 W. Golf Road, Rolling Meadows, IL 60008, 1-800-308-0374. To
           view a list of participating providers visit www.findbestbenefits.com.
           <span>
             You have the right to cancel this plan within 30 days of the
